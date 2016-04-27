@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="hadoop,big data," />
+  <meta name="keywords" content="slam,vo,lsd," />
 
 
 
@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="Hadoop Config">
+<meta name="description" content="run lsd slam">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hadoop config">
-<meta property="og:url" content="http://timingspace.github.io/2016/04/19/hadoop_config/index.html">
+<meta property="og:title" content="Run LSD_SLAM">
+<meta property="og:url" content="http://timingspace.github.io/2016/04/27/run_LSD_SLAM/index.html">
 <meta property="og:site_name" content="Xiangwei">
-<meta property="og:description" content="Hadoop Config">
-<meta property="og:updated_time" content="2016-04-19T05:42:09.000Z">
+<meta property="og:description" content="run lsd slam">
+<meta property="og:updated_time" content="2016-04-27T12:56:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hadoop config">
-<meta name="twitter:description" content="Hadoop Config">
+<meta name="twitter:title" content="Run LSD_SLAM">
+<meta name="twitter:description" content="run lsd slam">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> Hadoop config | Xiangwei </title>
+  <title> Run LSD_SLAM | Xiangwei </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -224,7 +224,7 @@
             
             
               
-                Hadoop config
+                Run LSD_SLAM
               
             
           </h1>
@@ -236,8 +236,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-04-19T13:37:51+08:00" content="2016-04-19">
-              2016-04-19
+            <time itemprop="dateCreated" datetime="2016-04-27T18:49:00+08:00" content="2016-04-27">
+              2016-04-27
             </time>
           </span>
 
@@ -282,7 +282,91 @@
       
 
       
-        <h1 id="Hadoop-config"><a href="#Hadoop-config" class="headerlink" title="Hadoop config"></a>Hadoop config</h1>
+        <h1 id="How-to-run-LSD-SLAM-in-your-own-computer-Ubuntu-14-04"><a href="#How-to-run-LSD-SLAM-in-your-own-computer-Ubuntu-14-04" class="headerlink" title="How to run LSD SLAM in your own computer(Ubuntu 14.04)"></a>How to run LSD SLAM in your own computer(Ubuntu 14.04)</h1><p>LSD SLAM is SLAM solution provide by Computer Vision Group of TUM, its full name is Large Scale Direct SLAM, here direct means that the method for obtaining R,t is without feature extraction.</p>
+<p>LSD_SLAM and ORB_SLAM are two best visual slam solution now, and it is very good to start your own SLAM based on them. Here I would like to share how to run LSD SLAM in your own computer.</p>
+<p>The official direction can be found on their github page <a href="http://github.com/tum-vision/lsd_slam" target="_blank" rel="external">http://github.com/tum-vision/lsd_slam</a>, if you can run it without any problem following its instruction, you can overpass this article. And if not, you may follow my article to complete it. And if you have any other problem, please write down it in the comment or just send a email to me!</p>
+<p>Now, let us begin!</p>
+<ol>
+<li>install ros in your computer. Ros is an robot operating system which is a set of software libraries and tools that help you build robot applications. LSD_SLAM is developed by ros, so the first step to run LSD_SLAM is to install ROS. You can follow the ros official tutorial(<a href="http://wiki.ros.org/indigo/Installation/Ubuntu" target="_blank" rel="external">http://wiki.ros.org/indigo/Installation/Ubuntu</a>) to install it, it is very easy and clear.<ol>
+<li>sudo sh -c ‘echo “deb <a href="http://packages.ros.org/ros/ubuntu" target="_blank" rel="external">http://packages.ros.org/ros/ubuntu</a> $(lsb_release -sc) main” &gt; /etc/apt/sources.list.d/ros-latest.list’</li>
+<li>sudo apt-key adv –keyserver hkp://ha.pool.sks-keyservers.net –recv-key 0xB01FA116</li>
+<li>sudo apt-get update</li>
+<li>sudo apt-get install ros-indigo-desktop-full</li>
+<li>sudo rosdep init;rosdep update</li>
+<li>echo “source /opt/ros/indigo/setup.bash” &gt;&gt; ~/.bashrc; source ~/.bashrc</li>
+</ol>
+</li>
+<li>install some dependence(maybe some of the dependence has already been installed)<ol>
+<li>sudo apt-get install python-rosinstall</li>
+<li>sudo apt-get install ros-indigo-libg2o ros-indigo-cv-bridge liblapack-dev libblas-dev freeglut3-dev libqglviewer-dev libsuitesparse-dev libx11-dev</li>
+</ol>
+</li>
+<li>initial ros workspace and download the code<ol>
+<li>make a new empty directory for you workspace first, it can be anywhere, we notated it ROS<ul>
+<li>mkdir ROS</li>
+<li>cd ROS</li>
+</ul>
+</li>
+<li>make a dir in ROS named ros_lsd_ws<ul>
+<li>mkdir ros_lsd_ws</li>
+<li>cd ros_lsd_ws</li>
+</ul>
+</li>
+<li>initialize ros workspace<ul>
+<li>rosws init . /opt/ros/indigo</li>
+<li>mkdir package_dir</li>
+<li>rosws set ~/rosbuild_ws/package -t .</li>
+<li>echo “source ~/rosbuild_ws/setup.bash” &gt;&gt; ~/.bashrc</li>
+<li>bash</li>
+<li>cd package</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>download codes using git from github, if you have not installed git, please install by sudo apt-get install git<ol>
+<li>git clone <a href="https://github.com/tum-vision/lsd_slam.git" target="_blank" rel="external">https://github.com/tum-vision/lsd_slam.git</a> lsd_slam</li>
+</ol>
+</li>
+<li><p>compile lsd_slam by rosmake</p>
+<ol>
+<li>rosmake lsd_slam</li>
+</ol>
+</li>
+<li><p>if no error emit, congratulation! You can now run lsd now. but you may encounter some error here for me some error about linking opencv lib come out and it take me about one day to solve it. If you meet similar problem, my be the words following is helpful to you.</p>
+<ol>
+<li>first find where you have install your opencv 2.4, you can search it in your Fils. My opencv2.4 is installed in /usr/include(.hpp files) and /usr/lib/x86_64-linux-gnu(libs)</li>
+<li>tell your cmake where is your opencv2.4 by editing two CMakeLists one of which is in ROS/ros_lsd_ws/package/lsd_slam/lsd_slam_core and the other is in ROS/ros_lsd_ws/package/lsd_slam/lsd_slam_view<ul>
+<li>add include_directories(/user/include)</li>
+<li>add link_directories(/usr/lib/x86_64-linux-gnu) you should change the path to your opencv path</li>
+<li>modify target_link_libraries(lsd_slam …) by add opencv_core, opencv_highgui, opencv_imgproc, opencv_calib3d before the ‘)’.</li>
+</ul>
+</li>
+<li>if it can not still compile it with error “undefined reference opencv…”  find your other opencv files and delete them!</li>
+</ol>
+</li>
+<li><p>run lsd_slam with dataset</p>
+<ol>
+<li>download the dataset from <a href="http://vision.in.tum.de/research/vslam/lsdslam(choose" target="_blank" rel="external">http://vision.in.tum.de/research/vslam/lsdslam(choose</a> .png files)</li>
+<li>start roscore, it should be done first every time you using ros<ul>
+<li>roscore</li>
+</ul>
+</li>
+<li>start lsd_slam_viewer<ul>
+<li>rosrun lsd_slam_viewer viewer</li>
+</ul>
+</li>
+<li>run lsd_slam_core<ul>
+<li>rosrun lsd_slam_core datst_slam _files:=path/to/your/images _calib:=path/to/your/calib</li>
+</ul>
+</li>
+<li>observe and enjoy it!<ol>
+<li>run lsd_slam with live camera</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
       
     </div>
 
@@ -296,9 +380,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hadoop/" rel="tag">#hadoop</a>
+            <a href="/tags/slam/" rel="tag">#slam</a>
           
-            <a href="/tags/big-data/" rel="tag">#big data</a>
+            <a href="/tags/vo/" rel="tag">#vo</a>
+          
+            <a href="/tags/lsd/" rel="tag">#lsd</a>
           
         </div>
       
@@ -307,13 +393,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/04/19/hadoop_config/" rel="next" title="Hadoop config">
+                <i class="fa fa-chevron-left"></i> Hadoop config
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/27/run_LSD_SLAM/" rel="prev" title="Run LSD_SLAM">
-                Run LSD_SLAM <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -447,7 +533,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop-config"><span class="nav-number">1.</span> <span class="nav-text">Hadoop config</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-run-LSD-SLAM-in-your-own-computer-Ubuntu-14-04"><span class="nav-number">1.</span> <span class="nav-text">How to run LSD SLAM in your own computer(Ubuntu 14.04)</span></a></li></ol></div>
             
           </div>
         </section>
