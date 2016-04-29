@@ -63,7 +63,7 @@
 <meta property="og:url" content="http://timingspace.github.io/2016/04/27/run_LSD_SLAM/index.html">
 <meta property="og:site_name" content="Xiangwei">
 <meta property="og:description" content="run lsd slam">
-<meta property="og:updated_time" content="2016-04-27T12:56:58.000Z">
+<meta property="og:updated_time" content="2016-04-29T02:01:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Run LSD_SLAM">
 <meta name="twitter:description" content="run lsd slam">
@@ -363,6 +363,20 @@
 <li>run lsd_slam with live camera</li>
 </ol>
 </li>
+<li>calibrate your camera with any method you like and save the parameter into a lile named calib.conf</li>
+<li>roscore</li>
+<li>rosrun lsd_slam_viewer viewer</li>
+<li>if you are using a usb camera, you should install usb_cam first and run it<ul>
+<li>mkdir usb_cam/src</li>
+<li>cd usb_cam/src</li>
+<li>git clone <a href="https://github.com/bosch-ros-pkg/usb_cam.git" target="_blank" rel="external">https://github.com/bosch-ros-pkg/usb_cam.git</a></li>
+<li>cd ..</li>
+<li>rosmake</li>
+<li>source devel/setup.bash</li>
+<li>rosrun usb_cam usb_cam_node</li>
+</ul>
+</li>
+<li>rosrun lsd_slam_core live_slam /image:=/usb_cam/image_raw _calib:=<calibration_file></calibration_file></li>
 </ol>
 </li>
 </ol>
