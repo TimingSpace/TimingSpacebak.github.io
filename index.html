@@ -227,7 +227,7 @@
               
                 
                 <a class="post-title-link" href="/2016/04/30/supervised_learning/" itemprop="url">
-                  Untitled
+                  畅谈机器学习
                 </a>
               
             
@@ -245,6 +245,25 @@
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -268,12 +287,12 @@
 
       
         
-          
-            <h1 id="畅谈监督学习"><a href="#畅谈监督学习" class="headerlink" title="畅谈监督学习"></a>畅谈监督学习</h1><p>小坏是一个计算机科学的在读博士，他的梦想是用自己的技术去改变世界，成为像图灵，香浓，爱迪生一样的人，并一直在为自己的梦想努力，然而现实是残酷的，十几年的摸爬滚打之后仍然是一个小菜鸟。直到遇到了小乖之后，小坏才发现自己其实并不是小菜鸟，小乖才是。。。<br><br>小乖和小坏一样是一个计算机科学的博士，，是小坏的师妹。<br><br>一天下课之后，小乖愁眉苦脸的走回实验室：<br><br>小乖： 师兄，你知道什么是机器学习吗？<br><br>小坏： 。。。我可说我除了机器学习别的什么都不知道吗。。。<br><br>小乖：那太好了，师兄你帮我讲讲呗，今天老师说了一堆我都没听太懂<br><br>小坏：听不懂正常，我当年也挺不懂，不过网上有很多公开课，讲得不都错，你可以听听看啊，我给你推荐几个： 斯坦福大学吴恩达教授讲的(<a href="https://www.coursera.org/learn/machine-learning" target="_blank" rel="external">https://www.coursera.org/learn/machine-learning</a>), 台湾大学林轩田教授（<a href="https://www.coursera.org/course/ntumlone）" target="_blank" rel="external">https://www.coursera.org/course/ntumlone）</a> 还有udacity上的机器学课（<a href="https://cn.udacity.com/courses/all/）。" target="_blank" rel="external">https://cn.udacity.com/courses/all/）。</a> 你有空可以看一看，初次之外，南京大学周志华教授写了一本叫《机器学习》的书，讲的也非常好。<br><br>小乖：哇喔，好多资源啊，我觉得我马上就要掌握机器学习了！！！<br><br>小坏：好天真的孩子。。。你真觉得自己能坚持看完？<br><br>小乖：嗯。。。我也不知道，但我会坚持的，之后没看完一点都来和师兄讨论一下，这样既能达到监督的目的又能起到巩固的作用。对了师兄，什么是监督学习？</p>
-<h1 id="什么是监督学习"><a href="#什么是监督学习" class="headerlink" title="什么是监督学习"></a>什么是监督学习</h1><p><br>小坏：哎，你话题衔接的好好！监督学习么，是机器学习三大基本类别中的一种，其余两种分别是非监督学习和强化学习。在监督学习中，用于训练的数据是有标签的，机器试图从所给的带标签的数据中学习出一个模型，然后这个模型去预测其他不带标签的数据的标签，根据标签的类型，监督学习又可以分为两种，学习连续标签的监督学习叫做回归，学习不连续标签的叫做分类。<br><br>小乖：师兄，你在说什么。。。标签是什么，模型是什么？<br><br>小坏：标签得和特征放在一起来解释，对于任何一个对象，如果我们想把描述清楚，就需要从各个角度对其进行描述，每一个角度的描述都是一个维度，每一个维度都是一个特征，所有的特征加在一起就是一条数据。比如说如果想描述一个苹果，我们一般会从苹果的颜色，质量，形状三个角度来描述，比如一个红色的半斤的圆苹果和一个绿色的二两的圆苹果，每一个描述的数据都是一个三维的数据,这三维的数据就是一个苹果的特征。<br><br>小乖：我明白特征是什么了，但你好像忘记说什么是标签了。。。<br><br>小坏：没有忘，正要说呢！其实标签也是一个数据的一个维度，只不过有些时候，数据的某个维度的信息没办法直接得到，或者是不方便得到，而我们恰好又十分关心数据的这个维度，比如说苹果甜不甜。有些时候，我们没办法直接去尝一下苹果甜不甜，比如我们在水果店买苹果，我们不肯能在决定买不买一个苹果之前去咬一口这个苹果啊，我们只能通过我们可以直接获取的数据维度（颜色，质量和形状等）去分析这个苹果甜。这个时候，苹果甜不甜就是数据标签！<br><br>小乖：我好像明白了，如果我们想通过一块红烧肉的气味，颜色，和形状判断它好不好吃，那么好不好吃就是标签，气味、颜色和形状就是特征，对吧！<br><br>小坏：对的！监督学习就是通过带标签的数据，学习出标签和特征之间的规律，然后用这个规律去推断其他的只有特征不带标签的数据，这个规律我们一般就叫做模型！<br><br>小乖：那我们一般怎么表示这个模型呢？</p>
-<h1 id="监督学习的数学模型"><a href="#监督学习的数学模型" class="headerlink" title="监督学习的数学模型"></a>监督学习的数学模型</h1><p><br>小坏：一般来讲，我们都是先选择一个模型，如人工神经网络（ANN)，支持向量机(SVM)，决策树（Decision Tree）,随机森林（Random Forest），K近邻（KNN）等，然后根据已有的带标签的数据去调节模型的参数，让模型可以很好的解释已有的数据，这个过程我们叫做训练，用来训练的数据我们叫做训练集。<br><br>小乖：那什么才叫模型可以很好的解释已有的带标签的数据呢？<br><br>小坏：就是训练误差足够小，什么是训练误差呢？每个模型其实都是一个函数，函数的输入时特征，输出是标签。我们把每一个数据的特征输入给模型，模型会输出一个标签，如果这个标签和数据本身的标签一样活差不多那就是说模型可以解释这条数据，如果不一样或差很多，就是不能很好的解释这条数据。刚才所说的解释的好其实就是说可以很好的解释大多数数据！对于回归问题，我们一般用平均误差平方（MSE）和R2来描述模型好不好；对于分类问题，一般用Precision和Recall来描述。<br><br>小乖：师兄你说那些我听不懂的名词我可以一会儿自己百度，但除此之外我还有一个问题，为什么说是要很好解释大多数数据而不是很好的解释全部数据呢？<br><br>小坏：不错，这个为题问得相当有水平！这其实是一个关于过拟合的问题，我们训练学习的模型的目的并不是去预测已有的数据，而是要去预测那些未知的数据！一般来讲，如果训练误差很小或者小到0了，此时的模型往往不具有很好的泛化性能，就是不能很好地预测新的数据特征的标签，就好像模型‘记住’了所有训练数据而不是从训练数据冲抽取出了一个模型！所以一般来讲，我们都会把已知标签的数据分成两部分分别作为训练集和测试集，训练集由于训练模型，测试集由于测试模型的效果，测试集上的效果才是有意义的效果！<br><br>小乖：明白了，多谢师兄！之后有不明白的再向你请教！<br><br>小坏：（给别人讲的感觉真好）嗯，拜拜</p>
-
-          
+          畅谈监督学习
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/30/supervised_learning/">
+              Read more &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -565,7 +584,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -574,7 +593,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
